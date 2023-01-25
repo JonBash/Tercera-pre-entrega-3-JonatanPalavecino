@@ -1,0 +1,24 @@
+{% extends "estudiantes/base.html" %}
+
+{% block subtitulo %}Lista de clientes{% endblock subtitulo %}
+
+
+{% block contenido %}
+{% include "estudiantes/barra_saludo.html" %}
+<h1 class="titulos-coder">Lista de clientes</h1>
+<a href="{% url 'crear_cliente' %}">Añadir</a>
+<br>
+
+<form action="{% url 'buscar_clientes' %}" method="post">
+  {% csrf_token %}
+  <input type="text" name="busqueda">
+  <input type="submit" value="Buscar">
+</form>
+<br>
+
+<ul>
+{% for customer in cliente %}
+  <li>{{ customer.apellido }}, {{ customer.nombre }}</li>
+{% endfor %}
+</ul>
+{% endblock contenido %}
